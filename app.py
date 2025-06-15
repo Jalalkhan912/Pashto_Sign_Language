@@ -2,6 +2,7 @@ import cv2
 import mediapipe as mp
 import numpy as np
 import torch
+import time
 import joblib
 
 # --------- Load Traced Model and Scaler ----------
@@ -37,6 +38,8 @@ def normalize_landmarks(landmarks):
 cap = cv2.VideoCapture(0)
 
 while True:
+    start_time = time.time()
+
     success, frame = cap.read()
     if not success:
         break
@@ -66,6 +69,12 @@ while True:
         # 4. Display prediction
         cv2.putText(frame, f"Class: {label}", (10, 40), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0, 255, 0), 2)
         cv2.putText(frame, f"Confidence: {confidence:.2f}", (10, 75), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0, 255, 255), 2)
+
+        end_time = time.time()
+        fps = 1 / (end_time - start_time + 1e-6)  # Add small value to avoid division by zero
+
+        # Draw FPS on screen
+        cv2.putText(frame, f"FPS: {fps:.1f}", (10, 110), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 0, 0), 2)
 
     # Show frame
     cv2.imshow("Hand Gesture Recognition", frame)
