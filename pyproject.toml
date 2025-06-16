@@ -6,9 +6,12 @@ readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
     "ipykernel>=6.29.5",
+    "joblib>=1.5.1",
     "mediapipe>=0.10.21",
+    "numpy>=1.26.4",
     "opencv-python>=4.11.0.86",
     "pandas>=2.3.0",
+    "pillow>=11.2.1",
     "pygame>=2.6.1",
     "scikit-learn>=1.6.1",
     "torch>=2.7.1",
